@@ -25,7 +25,7 @@ exports.fn = (event, context, callback) => {
             callback(err)
         } else {
             console.log(data)
-            callback(null, data)
+            callback(null, 'success')
         }
     })
 };

@@ -11,7 +11,7 @@ Resources:
       Description: ''
       MemorySize: 128
       Timeout: 10
-      Role: 'arn:aws:iam::815621908682:role/lambda_basic_execution'
+      Role: 'arn:aws:iam::815621908682:role/service-role/lambda_dynamodb_store_cy'
       Events:
         Api1:
           Type: Api
