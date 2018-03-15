@@ -3,30 +3,25 @@ var ses = new AWS.SES({apiVersion: '2010-12-01'});
 
 exports.handler = (event, context, callback) => {
     // TODO implement
-    callback(null, 'Hello from Lambda');
-    
+    let data = "Message from: " + event.from + "<br/><br />"
+    data += event.body
     var params = {
         Destination: {
-            ToAddresses: ["sonabstudios@gmail.com"]
+            ToAddresses: [event.to]
         },
         Message: {
             Body: {
                 Html: {
                     Charset: "UTF-8", 
-                    Data: "Test from lambda! This message body contains HTML formatting. It can, for example, contain links like this one: <a class=\"ulink\" href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide\" target=\"_blank\">Amazon SES Developer Guide</a>."
-                }, 
-                Text: {
-                    Charset: "UTF-8", 
-                    Data: "This is the message body in text format."
+                    Data: data
                 }
             }, 
             Subject: {
                 Charset: "UTF-8", 
-                Data: "Test email"
+                Data: event.subject
             }
         }, 
-        ReplyToAddresses: [
-        ], 
+        ReplyToAddresses: [], 
         ReturnPath: "", 
         ReturnPathArn: "", 
         Source: "", 
@@ -36,8 +31,10 @@ exports.handler = (event, context, callback) => {
     ses.sendEmail(params, function(err, data) {
          if (err) {
              console.log(err, err.stack)
+             callback(err)
          } else {
-             console.log(data);
+             console.log(data)
+             callback(null, data)
          }
     })
 }
