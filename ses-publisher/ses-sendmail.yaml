@@ -1,6 +1,6 @@
 ﻿AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: alpha-03
+Description: alpha-04
 Resources:
   sessendmail:
     Type: 'AWS::Serverless::Function'
@@ -8,7 +8,7 @@ Resources:
       Handler: index.handler
       Runtime: nodejs6.10
       CodeUri: .
-      Description: alpha-03
+      Description: alpha-04
       MemorySize: 128
       Timeout: 3
       Role: ''

@@ -3,7 +3,7 @@ var ses = new AWS.SES({apiVersion: '2010-12-01'});
 
 exports.handler = (event, context, callback) => {
     // TODO implement
-    let data = "Message from: " + event.from + "<br/><br />"
+    let data = "Message from: " + event.fromname + " @" + event.fromemail + "<br/><br />"
     data += event.body
     var params = {
         Destination: {
