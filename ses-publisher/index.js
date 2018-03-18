@@ -2,9 +2,12 @@ const AWS = require('aws-sdk')
 var ses = new AWS.SES({apiVersion: '2010-12-01'});
 
 exports.handler = (event, context, callback) => {
-    // TODO implement
-    let data = "Message from: " + event.fromname + " @" + event.fromemail + "<br/><br />"
-    data += event.body
+    let message = event.body
+    console.log("message: " + event.body)
+    message = message.replace(/(?:\r\\n|\r|\\n)/g, '<br />')
+    console.log("new message: " + message)
+    let data = "Message from: " + event.fromname + " - reply to: " + event.fromemail + "<br/><br />"
+    data += message
     var params = {
         Destination: {
             ToAddresses: [event.to]
